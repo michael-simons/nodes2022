@@ -60,6 +60,45 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<annotationProcessorPaths>
+						<annotationProcessorPath>
+							<groupId>eu.michael-simons.neo4j</groupId>
+							<artifactId>neo4j-migrations-annotation-processor</artifactId>
+							<version>1.14.0</version>
+						</annotationProcessorPath>
+					</annotationProcessorPaths>
+					<compilerArgs>
+						<arg>-Aorg.neo4j.migrations.catalog_generator.default_catalog_name=R040__Create_sdn_constraints.xml</arg>
+					</compilerArgs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<phase>process-classes</phase>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}/neo4j/migrations/</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/generated-sources/annotations/neo4j-migrations</directory>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
