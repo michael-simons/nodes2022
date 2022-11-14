@@ -1,5 +1,7 @@
 package com.example.nodes2022.movies;
 
+import java.util.UUID;
+
 import org.springframework.data.annotation.PersistenceCreator;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
@@ -11,14 +13,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 public final class Person {
 
 	@Id @GeneratedValue
-	private final Long id;
+	private final UUID id;
 
 	private final String name;
 
 	private Integer born;
 
 	@PersistenceCreator
-	private Person(Long id, String name, Integer born) {
+	private Person(UUID id, String name, Integer born) {
 		this.id = id;
 		this.born = born;
 		this.name = name;
@@ -29,7 +31,7 @@ public final class Person {
 		this(null, name, born);
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 

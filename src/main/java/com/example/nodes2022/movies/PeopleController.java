@@ -1,5 +1,7 @@
 package com.example.nodes2022.movies;
 
+import java.util.UUID;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +33,7 @@ public class PeopleController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Person> get(@PathVariable("id") Long id) {
+	public ResponseEntity<Person> get(@PathVariable("id") UUID id) {
 		return peopleRepository.findById(id)
 			.map(ResponseEntity::ok)
 			.orElseGet(() -> ResponseEntity.notFound().build());

@@ -1,11 +1,12 @@
 package com.example.nodes2022.movies;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
-interface PeopleRepository extends Neo4jRepository<Person, Long> {
+interface PeopleRepository extends Neo4jRepository<Person, UUID> {
 
 	@Query("""
 		MATCH (person:Person {name: $name})
