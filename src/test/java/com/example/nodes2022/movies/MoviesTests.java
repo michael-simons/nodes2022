@@ -48,10 +48,16 @@ class MoviesTests {
 	}
 
 	@Test
+	void shouldCreateMovie(@Autowired MovieRepository movieRepository) {
+		var movie = movieRepository.save(new Movie("Bullet Train", "A movie about vengeance."));
+		assertThat(movie.getId()).isNotNull();
+	}
+
+	@Test
 	void findByTitleShouldWork(@Autowired MovieRepository movieRepository) {
 		var title = "The Matrix";
 
-		assertThat(movieRepository.findById(title))
+		assertThat(movieRepository.findByTitle(title))
 			.isPresent()
 			.hasValueSatisfying(movie -> assertThat(movie.getTitle()).isEqualTo(title));
 	}

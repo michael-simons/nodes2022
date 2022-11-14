@@ -26,7 +26,7 @@ public final class MoviesController {
 
 	@GetMapping("/{title}")
 	public ResponseEntity<Movie> get(@PathVariable("title") String title) {
-		return movieRepository.findById(title)
+		return movieRepository.findByTitle(title)
 			.map(ResponseEntity::ok)
 			.orElseGet(() -> ResponseEntity.notFound().build());
 	}

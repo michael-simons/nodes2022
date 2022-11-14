@@ -3,8 +3,10 @@ package com.example.nodes2022.movies;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.annotation.PersistenceCreator;
+import org.springframework.data.neo4j.core.schema.GeneratedValue;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
@@ -14,7 +16,9 @@ import org.springframework.data.neo4j.core.schema.Relationship.Direction;
 @Node
 public final class Movie {
 
-	@Id
+	@Id @GeneratedValue
+	private final UUID id;
+
 	private final String title;
 
 	@Property("tagline")
@@ -29,14 +33,12 @@ public final class Movie {
 	private Integer released;
 
 	public Movie(String title, String description) {
-		this.title = title;
-		this.description = description;
-		this.actors = new ArrayList<>();
-		this.directors = new ArrayList<>();
+		this(null, title, description, null, null);
 	}
 
 	@PersistenceCreator
-	public Movie(String title, String description, List<Actor> actors, List<Person> directors) {
+	public Movie(UUID id, String title, String description, List<Actor> actors, List<Person> directors) {
+		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.actors = actors == null ? new ArrayList<>() : new ArrayList<>(actors);
@@ -75,5 +77,9 @@ public final class Movie {
 	public Movie addDirectors(Collection<Person> directors) {
 		this.directors.addAll(directors);
 		return this;
+	}
+
+	public UUID getId() {
+		return id;
 	}
 }
