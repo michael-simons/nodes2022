@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<migration xmlns="https://michael-simons.github.io/neo4j-migrations">
+	<catalog>
+		<indexes>
+			<index name="movie_title_index">
+				<label>Movie</label>
+				<properties>
+					<property>title</property>
+				</properties>
+			</index>
+		</indexes>
+	</catalog>
+
+	<create ref="movie_title_index"/>
+</migration>
