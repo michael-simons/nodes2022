@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<migration xmlns="https://michael-simons.github.io/neo4j-migrations">
+
+	<refactor type="normalize.asBoolean">
+		<parameters>
+			<parameter name="property">watched</parameter>
+			<parameter name="trueValues">
+				<value>y</value>
+				<value>YES</value>
+			</parameter>
+			<parameter name="falseValues">
+				<value>n</value>
+				<value>NO</value>
+			</parameter>
+		</parameters>
+	</refactor>
+</migration>
